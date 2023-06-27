@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/user.entity';
 import { DataSource, Repository } from 'typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
@@ -12,8 +13,13 @@ export class TaskRepository extends Repository<Task> {
     super(Task, dataSource.createEntityManager());
   }
 
-  async getTasks({ search, status }: GetTasksFilterDto): Promise<Task[]> {
+  async getTasks(
+    { search, status }: GetTasksFilterDto,
+    user: User,
+  ): Promise<Task[]> {
     const query = this.createQueryBuilder('task');
+
+    query.where('task.userId = :userId', { userId: user.id });
 
     if (status) {
       query.andWhere('task.status = :status', { status });
@@ -28,14 +34,19 @@ export class TaskRepository extends Repository<Task> {
     return tasks;
   }
 
-  async createTask({ title, description }: CreateTaskDto): Promise<Task> {
+  async createTask(
+    { title, description }: CreateTaskDto,
+    user: User,
+  ): Promise<Task> {
     const task = this.create({
       title,
       description,
+      user,
       status: TaskStatus.OPEN,
     });
 
     await this.save(task);
+    delete task.user;
     return task;
   }
 }

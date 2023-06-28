@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+  dev-db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_PASSWORD: "${DB_USERNAME}"
+      POSTGRES_USER: "${DB_PASSWORD}"
+    ports:
+      - 5435:5435
+    command: -p 5435
+
+    volumes:
+      - devData:/var/lib/postgresql/data
+    networks:
+      - taskmanager
+
+  test-db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_PASSWORD: "${DB_USERNAME}"
+      POSTGRES_USER: "${DB_PASSWORD}"
+    ports:
+      - 5436:5436
+    command: -p 5436
+
+    volumes:
+      - testData:/var/lib/postgresql/data
+    networks:
+      - taskmanager
+
+volumes:
+  devData:
+    driver: local
+  testData:
+    driver: local
+  pgdata:
+networks:
+  taskmanager:
+    driver: bridge
+

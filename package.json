@@ -6,6 +6,12 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "dev:db:rm": "docker-compose rm  -s -f -v dev-db",
+    "dev:db:up": "docker-compose  --env-file ./config/.env.dev up dev-db",
+    "dev:db" : "yarn dev:db:rm && yarn dev:db:up",
+    "test:db:rm": "docker-compose rm  -s -f -v test-db",
+    "test:db:up": "docker-compose  --env-file ./config/.env.test up test-db",
+    "test:db" : "yarn test:db:rm && yarn test:db:up",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

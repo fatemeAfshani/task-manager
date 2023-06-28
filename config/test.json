@@ -1,0 +1,17 @@
+{
+    "db": {
+        "host": "localhost",
+        "port": 5432,
+        "name": "taskmanagement",
+        "username": "fateme",
+        "password": "aztprsst",
+        "synchronize": true
+    },
+    "jwt": {
+        "expire": 3600,
+        "secret": "very strong secret"
+    },
+    "app": {
+        "port": 3000
+    }
+}

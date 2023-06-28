@@ -10,7 +10,6 @@ import {
   Query,
   UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/users/user.decorator';
@@ -30,7 +29,8 @@ export class TasksController {
 
   @Get()
   getTasks(
-    @Query(ValidationPipe) searchFilter: GetTasksFilterDto,
+    @Query()
+    searchFilter: GetTasksFilterDto,
     @GetUser() user: User,
   ): Promise<Task[]> {
     return this.taskService.getTasks(searchFilter, user);
@@ -45,7 +45,7 @@ export class TasksController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
+  @UsePipes()
   createTask(
     @Body() createTaskDto: CreateTaskDto,
     @GetUser() user: User,

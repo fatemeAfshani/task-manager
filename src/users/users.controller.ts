@@ -1,4 +1,4 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { UserCredentialsDto } from './dto/user-credentials.dto';
 import { UsersService } from './users.service';
 
@@ -6,15 +6,13 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
   @Post('/signup')
-  async signup(
-    @Body(ValidationPipe) userCredential: UserCredentialsDto,
-  ): Promise<void> {
+  async signup(@Body() userCredential: UserCredentialsDto): Promise<void> {
     return this.userService.signup(userCredential);
   }
 
   @Post('/signin')
   async signin(
-    @Body(ValidationPipe) userCredential: UserCredentialsDto,
+    @Body() userCredential: UserCredentialsDto,
   ): Promise<{ accessToken: string }> {
     return this.userService.signin(userCredential);
   }

@@ -1,10 +1,10 @@
 {
     "db": {
         "host": "localhost",
-        "port": 5432,
-        "name": "taskmanagement",
-        "username": "fateme",
-        "password": "aztprsst",
+        "port": 5436,
+        "name": "testtaskmanagement",
+        "username": "postgres",
+        "password": "postgres",
         "synchronize": true
     },
     "jwt": {

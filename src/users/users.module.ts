@@ -24,6 +24,6 @@ const { expire, secret } = config.get('jwt');
   ],
   controllers: [UsersController],
   providers: [UsersService, UserRepository, JwtStrategy],
-  exports: [JwtStrategy, PassportModule],
+  exports: [JwtStrategy, PassportModule, UserRepository],
 })
 export class UsersModule {}

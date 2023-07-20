@@ -1,9 +1,8 @@
 # Task Manager
 
-this is a simple task manager application built with nest framework
+This is a simple task manager application built with the Nest framework.
 
-
-after signup/signin user can create a task, change it's status, get tasks with filter, get specific task and delete it.
+After signing up and signing in, users can create tasks, update their status, retrieve tasks with filters, access specific tasks, and delete them
 
 ## Prerequisites
 * node.js
@@ -23,6 +22,7 @@ yarn install
 ```bash
 yarn start:dev
 ```
+After running the app, you can access the documentation by navigating to 'localhost:3000/api'
 
 ## Run e2e tests
 ```bash
@@ -34,3 +34,4 @@ yarn test:e2e
 * [nestjs](https://docs.nestjs.com/) - A progressive Node.js framework
 * [postgresql](https://www.postgresql.org/) - Relational database
 * [typeorm](https://typeorm.io/) - Orm for javascript and typescript
+

@@ -17,7 +17,7 @@ export class UserRepository extends Repository<User> {
     super(User, dataSource.createEntityManager());
   }
 
-  async createUser({ username, password }: UserCredentialsDto): Promise<void> {
+  async createUser({ username, password }: UserCredentialsDto): Promise<User> {
     try {
       const hashedPassword = await bcrypt.hash(password, this.saltRounds);
       const user = this.create({
@@ -26,6 +26,8 @@ export class UserRepository extends Repository<User> {
       });
 
       await user.save();
+      delete user.password;
+      return user;
     } catch (error) {
       this.logger.error(`error in adding new user`, error.stack);
       if (error.code === '23505') {
